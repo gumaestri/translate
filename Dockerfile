@@ -10,9 +10,9 @@ RUN apt-get update && apt-get install -y \
   nodejs
 
 # Use en_US.UTF-8 as our locale
-#RUN locale-gen en_US.UTF-8
-#ENV LANG en_US.UTF-8
-#ENV LANGUAGE en_US:en
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
 #ENV LC_ALL en_US.UTF-8
 
 # Configure the main working directory. This is the base 
