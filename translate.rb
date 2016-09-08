@@ -29,6 +29,7 @@ class JavaProps
     @properties.each do |key,value|
       if value.include? "@@"
         to_translate = value.delete("@@")
+        to_translate = 
         @properties[key] = EasyTranslate.translate(to_translate, :from => :pt, :to => :es)
       end
     end
@@ -42,6 +43,14 @@ class JavaProps
   #Save the properties back to file
   def save filename
     File.open(filename, 'w') { |file| @properties.each {|key,value| file.write("#{key}:#{value},\n") } }  
+  end
+
+  def extractInterpolationPlaceholder translate
+    i = 0
+    while !translate.index(/{{[a-z]}}/).nil? do
+       interpolation = translate[/{{[a-z]}}/]
+       translate = translate.gsub(/{{[a-z]}}/, "$#{i}")
+    end
   end
   
 end
